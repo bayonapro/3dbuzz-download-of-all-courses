@@ -11,6 +11,6 @@ Modules:
 * urllib
 * zipfile
 
-Usage: python bayonaload.py
+Usage: python3 bayonaload.py
 
 If it doens't work it's maybe because the web is too busy, check if error is 503.
