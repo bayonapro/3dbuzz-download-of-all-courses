@@ -23,8 +23,9 @@ url_pagina = 'https://www.3dbuzz.com'
 req = requests.get(url_pagina)
 # Obtenemos todos los zips
 files = re.findall('href="(.*zip)"', req.text)
+print('Already exists', len(valid_zips), 'files')
 print('Downloading', len(files) - len(valid_zips), 'files, be patient...')
-for file in files:
+for idx, file in enumerate(files):
     name = file.split('/')[-1]
     # Comprobamos que no exista ya
     if name in valid_zips:
@@ -39,7 +40,7 @@ for file in files:
     except:
         pass
 
-    print('Downloading', name + '...')
+    print('Downloading file', str(idx+1) + ':', name + '...')
     downloaded = True
     with open(os.path.join(path, folder, name), 'wb') as f:
         try:
@@ -50,9 +51,9 @@ for file in files:
             print(str(err).replace(':',''))
             downloaded = False
         finally:
-            print("File", name, end=' ')
+            print("File", str(idx+1) + ':', name, end=' ')
             if not downloaded: print('not', end=' ')
             print('downloaded')
 
         if not downloaded:
-            sys.exit(-1)
+            sys.exit(1)
