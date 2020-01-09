@@ -14,3 +14,9 @@ Modules:
 Usage: python3 bayonaload.py
 
 If it doens't work it's maybe because the web is too busy, check if error is 503.
+
+To run the c file:
+gcc permarun.c -o permarun.exe
+./permarun.exe
+
+Only works in Linux
