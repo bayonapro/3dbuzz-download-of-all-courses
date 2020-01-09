@@ -23,7 +23,7 @@ url_pagina = 'https://www.3dbuzz.com'
 req = requests.get(url_pagina)
 # Obtenemos todos los zips
 files = re.findall('href="(.*zip)"', req.text)
-print('Downloading', len(files), 'files, be patient...')
+print('Downloading', len(files) - len(valid_zips), 'files, be patient...')
 for file in files:
     name = file.split('/')[-1]
     # Comprobamos que no exista ya
@@ -47,7 +47,7 @@ for file in files:
             # correspondiente
             f.write(urlopen(file).read())
         except Exception as err:
-            print(err)
+            print(str(err).replace(':',''))
             downloaded = False
         finally:
             print("File", name, end=' ')
